@@ -94,14 +94,14 @@ Feature Config
 	* Applies to C++ containers **only** (not Lua tables or algorithms)
 	* Defaults to 1 (containers in Lua count from 1)
 
-``SOL_ENABLE_INTEROP`` triggers the following change:
+``SOL_USE_INTEROP`` triggers the following change:
 	* Allows the use of ``extensible<T>`` to be used with ``userdata_checker`` and ``userdata_getter`` to retrieve non-sol usertypes
 		- Particularly enables non-sol usertypes to be used in overloads
 		- See the :ref:`stack documentation<userdata-interop>` for details
 	* May come with a slight performance penalty: only recommended for those stuck with non-sol libraries that still need to leverage some of sol's power
 	* **Not** turned on by default under any settings: *this MUST be turned on manually*
 	
-``SOL_AUTOMAGICAL_TYPES_BY_DEFAULT`` triggers the following change:
+``SOL_DEFAULT_AUTOMAGICAL_USERTYPES`` triggers the following change:
 	* Either turns on (``!= 0``) or turns off (``== 0``) automagical usertype detection by default.
 	* Automagical usertypes search for specific C++ conventions to define common methods for the end-user.
 	* Some automagical methods might cause huge compiler errors, and some people have code bases with different conventions.
@@ -134,6 +134,7 @@ Linker Config
 
 ``SOL_USING_CXX_LUA`` triggers the following changes:
 	* Lua includes are no longer wrapped in ``extern "C" {}`` blocks
+	* ``SOL_NO_LUA_HPP`` takes less precedence if this is explicitly turned on
 	* Turns on ``SOL_EXCEPTIONS_SAFE_PROPAGATION`` automatically for you
 	* Only use this if you know you've built your LuaJIT with the C++-specific invocations of your compiler (Lua by default builds as C code and is not distributed as a C++ library, but a C one with C symbols)
 
